@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
 private const val REQUEST_FINE_LOCATION = 4050
-private const val DEFAULT_ZOOM = 12.0f
+private const val DEFAULT_ZOOM = 18.0f
 
 /**
  * Activity, that contains SupportMapFragment, checks fine location permission and centers on

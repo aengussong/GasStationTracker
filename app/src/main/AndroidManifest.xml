@@ -19,7 +19,6 @@
 
         <activity
             android:name=".ui.addstation.AddStationActivity"
-            android:label="@string/title_activity_add_station"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.MainActivity"

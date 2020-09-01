@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rv_bottom_padding">50dp</dimen>
+    <dimen name="fab_margin">30dp</dimen>
+    <dimen name="details_input_width">200dp</dimen>
+
+    <dimen name="padding_5">10dp</dimen>
+    <dimen name="padding_10">20dp</dimen>
+    <dimen name="padding_20">40dp</dimen>
+    <dimen name="btn_width">120dp</dimen>
+</resources>
