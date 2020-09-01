@@ -10,6 +10,8 @@
 /build
 /captures
 .cxx
+google_maps_api.xml
+
 ### Android template
 # Built application files
 *.apk
