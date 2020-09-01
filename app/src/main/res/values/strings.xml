@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GasStationTracker</string>
+
+    <string name="stations_list">Gas Stations</string>
+    <string name="stations_stats">Stations Statistics</string>
 </resources>
