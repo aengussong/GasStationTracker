@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.aengussong.gasstationtracker.R
 import com.aengussong.gasstationtracker.model.Station
+import com.aengussong.gasstationtracker.ui.addstation.AddStationViewModel
 import com.aengussong.gasstationtracker.utils.getString
 import kotlinx.android.synthetic.main.dialog_add_details.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DetailsDialog(private val address: String) : DialogFragment() {
+
+    private val viewModel: AddStationViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +34,9 @@ class DetailsDialog(private val address: String) : DialogFragment() {
                 et_quantity.getString().toIntOrNull() ?: 0,
                 et_cost.getString().toDoubleOrNull() ?: 0.0
             )
+
+            viewModel.addStation(station)
+            dismiss()
         }
     }
 }

@@ -20,13 +20,13 @@
         app:layout_constraintStart_toStartOf="@id/guide"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+     <TextView
         android:id="@+id/tv_fuel_supplier"
         style="@style/DetailsTextView"
         android:text="@string/fuel_supplier"
         app:layout_constraintBottom_toBottomOf="@id/et_fuel_supplier"
         app:layout_constraintEnd_toEndOf="@id/guide"
-        app:layout_constraintTop_toTopOf="et_fuel_supplier" />
+        app:layout_constraintTop_toTopOf="@id/et_fuel_supplier" />
 
     <EditText
         android:id="@+id/et_fuel_supplier"
