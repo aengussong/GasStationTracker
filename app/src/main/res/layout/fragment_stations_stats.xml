@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ir.androidexception.datatable.DataTable xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/data_table"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stations stats"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/padding_5"
+    app:direction="ltr"
+    app:header_background_color="@android:color/white"
+    app:header_gravity="center"
+    app:header_horizontal_padding="0dp"
+    app:header_text_color="@android:color/black"
+    app:header_text_size="@dimen/text_size"
+    app:header_vertical_padding="@dimen/padding_4"
+    app:persian_number="false"
+    app:row_background_color="@android:color/white"
+    app:row_gravity="center"
+    app:row_text_color="@color/gray"
+    app:row_text_size="@dimen/text_size"
+    app:row_vertical_padding="@dimen/padding_4" />

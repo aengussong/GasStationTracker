@@ -1,4 +1,4 @@
-package com.aengussong.gasstationtracker.ui.main
+package com.aengussong.gasstationtracker.ui.main.list
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.aengussong.gasstationtracker.R
 import com.aengussong.gasstationtracker.ui.addstation.AddStationActivity
-import com.aengussong.gasstationtracker.ui.main.adapter.StationsListAdapter
+import com.aengussong.gasstationtracker.ui.main.MainViewModel
 import com.aengussong.gasstationtracker.utils.doWhileActive
 import kotlinx.android.synthetic.main.fragment_stations_list.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,7 +22,8 @@ class StationsListFragment : Fragment(R.layout.fragment_stations_list) {
     @ExperimentalCoroutinesApi
     @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = StationsListAdapter()
+        val adapter =
+            StationsListAdapter()
         stations_list.adapter = adapter
 
         lifecycleScope.doWhileActive {

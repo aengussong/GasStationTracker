@@ -3,8 +3,8 @@ package com.aengussong.gasstationtracker.ui.main.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.aengussong.gasstationtracker.ui.main.StationsListFragment
-import com.aengussong.gasstationtracker.ui.main.StationsStatsFragment
+import com.aengussong.gasstationtracker.ui.main.list.StationsListFragment
+import com.aengussong.gasstationtracker.ui.main.stats.StationsStatsFragment
 
 private const val TABS_COUNT = 2
 

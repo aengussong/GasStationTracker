@@ -1,4 +1,4 @@
-package com.aengussong.gasstationtracker.ui.main.adapter
+package com.aengussong.gasstationtracker.ui.main.list
 
 import android.view.LayoutInflater
 import android.view.View
