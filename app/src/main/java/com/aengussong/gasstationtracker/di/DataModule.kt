@@ -6,6 +6,7 @@ import com.aengussong.gasstationtracker.repo.local.FirebaseDataProvider
 import com.aengussong.gasstationtracker.repo.local.LocalDataProvider
 import com.aengussong.gasstationtracker.repo.local.UserIdProvider
 import com.aengussong.gasstationtracker.repo.local.db.FirebaseDb
+import com.aengussong.gasstationtracker.sync.SyncManager
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -16,8 +17,10 @@ val dataModule = module {
 
     single {
         val userId = UserIdProvider.getId(androidApplication())
-        FirebaseDb.getInstance(userId).apply {
+        FirebaseDb.getInstance(get(), userId).apply {
             keepSynced(true)
         }
     }
+
+    single { SyncManager(androidApplication()) }
 }

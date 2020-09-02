@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import java.util.*
 
-private const val KEY_STATIONS = "stations"
+const val KEY_STATIONS = "stations"
 
 class FirebaseDataProvider(db: DatabaseReference) : LocalDataProvider {
 
