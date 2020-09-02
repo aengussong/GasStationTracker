@@ -7,7 +7,6 @@ class FirebaseDb {
     companion object {
         fun getInstance(syncManager: SyncManager, userId: String): DatabaseReference {
             return FirebaseDatabase.getInstance().run {
-                setPersistenceEnabled(true)
                 setOfflineListener(syncManager, this)
                 getReference(userId)
             }
