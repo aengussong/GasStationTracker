@@ -1,26 +1,23 @@
 package com.aengussong.gasstationtracker.di
 
-import androidx.room.Room
 import com.aengussong.gasstationtracker.repo.RepoImpl
 import com.aengussong.gasstationtracker.repo.Repository
+import com.aengussong.gasstationtracker.repo.local.FirebaseDataProvider
 import com.aengussong.gasstationtracker.repo.local.LocalDataProvider
-import com.aengussong.gasstationtracker.repo.local.RoomLocalProvider
-import com.aengussong.gasstationtracker.repo.local.db.GasStationDatabase
+import com.aengussong.gasstationtracker.repo.local.UserIdProvider
+import com.aengussong.gasstationtracker.repo.local.db.FirebaseDb
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val dataModule = module {
-    single<LocalDataProvider> { RoomLocalProvider(get()) }
+    single<LocalDataProvider> { FirebaseDataProvider(get()) }
 
     single<Repository> { RepoImpl(get()) }
 
     single {
-        Room.databaseBuilder(
-            androidApplication(),
-            GasStationDatabase::class.java,
-            "GasStationDatabase"
-        ).build()
+        val userId = UserIdProvider.getId(androidApplication())
+        FirebaseDb.getInstance(userId).apply {
+            keepSynced(true)
+        }
     }
-
-    single { get<GasStationDatabase>().stationDao() }
 }

@@ -10,11 +10,11 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repo: Repository) : ViewModel() {
 
-    fun getStations(): LiveData<List<Station>> {
+    fun getStations(): LiveData<List<Station?>> {
         return repo.getStations().asLiveData()
     }
 
-    fun deleteStation(id: Int) {
+    fun deleteStation(id: String) {
         viewModelScope.launch {
             repo.deleteStation(id)
         }

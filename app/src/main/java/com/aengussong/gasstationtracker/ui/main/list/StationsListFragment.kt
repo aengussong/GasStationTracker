@@ -47,7 +47,7 @@ class StationsListFragment : Fragment(R.layout.fragment_stations_list) {
         }
     }
 
-    private fun openAddStationScreen(stationId: Int? = null) {
+    private fun openAddStationScreen(stationId: String? = null) {
         startActivity(AddStationActivity.getIntent(requireContext(), stationId))
     }
 

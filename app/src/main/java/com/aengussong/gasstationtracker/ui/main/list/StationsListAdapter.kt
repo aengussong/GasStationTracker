@@ -46,12 +46,12 @@ class StationsListAdapter : RecyclerView.Adapter<StationsListAdapter.StationView
         holder.bind(list[position])
     }
 
-    fun updateStations(stationsList: List<Station>) {
+    fun updateStations(stationsList: List<Station?>) {
         val callback = DefaultDiffCallback(list, stationsList)
         DiffUtil.calculateDiff(callback).dispatchUpdatesTo(this)
 
         list.clear()
-        list.addAll(stationsList)
+        list.addAll(stationsList.filterNotNull())
     }
 
     fun getEditFlow(): Flow<Station> = editChannel.asFlow()

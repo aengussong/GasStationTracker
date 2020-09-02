@@ -12,7 +12,7 @@ class RepoImpl(private val local: LocalDataProvider) : Repository {
         local.saveStation(station)
     }
 
-    override fun getStations(): Flow<List<Station>> {
+    override fun getStations(): Flow<List<Station?>> {
         return local.getStations()
     }
 
@@ -20,11 +20,11 @@ class RepoImpl(private val local: LocalDataProvider) : Repository {
         local.updateStation(station)
     }
 
-    override fun getStation(id: Int): Flow<Station?> {
+    override fun getStation(id: String): Flow<Station?> {
         return local.getStation(id)
     }
 
-    override suspend fun deleteStation(id: Int) = withContext(Dispatchers.IO) {
+    override suspend fun deleteStation(id: String) = withContext(Dispatchers.IO) {
         local.deleteStation(id)
     }
 }

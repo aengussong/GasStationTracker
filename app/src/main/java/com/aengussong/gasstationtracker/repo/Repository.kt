@@ -7,11 +7,11 @@ interface Repository {
 
     suspend fun addStation(station: Station)
 
-    fun getStations(): Flow<List<Station>>
+    fun getStations(): Flow<List<Station?>>
 
     suspend fun updateStation(station: Station)
 
-    fun getStation(id: Int): Flow<Station?>
+    fun getStation(id: String): Flow<Station?>
 
-    suspend fun deleteStation(id: Int)
+    suspend fun deleteStation(id: String)
 }

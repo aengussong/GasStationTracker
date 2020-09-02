@@ -17,7 +17,7 @@ private const val EXTRA_ID = "extra_id"
 class AddStationActivity : MapActivity() {
 
     companion object {
-        fun getIntent(context: Context, stationId: Int?): Intent {
+        fun getIntent(context: Context, stationId: String?): Intent {
             return Intent(context, AddStationActivity::class.java).also { intent ->
                 stationId?.let { id -> intent.putExtra(EXTRA_ID, id) }
             }
@@ -26,7 +26,7 @@ class AddStationActivity : MapActivity() {
 
     private val viewModel: AddStationViewModel by viewModel()
 
-    private val stationId: Int? by lazy { intent.getIntExtraOrNull(EXTRA_ID) }
+    private val stationId: String? by lazy { intent.getStringExtra(EXTRA_ID) }
     private var station: Station? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +55,4 @@ class AddStationActivity : MapActivity() {
             dialog.show(supportFragmentManager, DetailsDialog::class.simpleName)
         }
     }
-}
-
-private fun Intent.getIntExtraOrNull(name: String): Int? {
-    val extra = getIntExtra(name, -1)
-    return if (extra == -1)
-        null
-    else
-        extra
 }

@@ -19,7 +19,7 @@ class StationsStatsViewModel(private val repo: Repository) : ViewModel() {
 
     fun getStations(): LiveData<StationsDto> {
         return repo.getStations().map {
-            mapToDto(it)
+            mapToDto(it.filterNotNull())
         }.asLiveData()
     }
 
@@ -27,7 +27,7 @@ class StationsStatsViewModel(private val repo: Repository) : ViewModel() {
         val rows = ArrayList<DataTableRow>()
         stations.forEach { station ->
             val row = DataTableRow.Builder()
-                .value(station.id.toString())
+                .value(station.id)
                 .value(station.fuelSupplier)
                 .value(station.cost.toString())
                 .build()

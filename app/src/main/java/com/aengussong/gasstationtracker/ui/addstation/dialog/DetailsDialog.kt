@@ -55,10 +55,7 @@ class DetailsDialog private constructor() : DialogFragment() {
         }
 
         btn_add.setOnClickListener {
-            val updatedStation = getStation().copy(
-                id = station?.id ?: 0,
-                visitedCounter = station?.visitedCounter ?: 0
-            )
+            val updatedStation = getStation().copy(id = station?.id ?: "")
             viewModel.updateStation(updatedStation)
             dismiss()
         }

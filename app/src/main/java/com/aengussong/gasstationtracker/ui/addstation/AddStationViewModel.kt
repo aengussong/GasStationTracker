@@ -25,7 +25,7 @@ class AddStationViewModel(private val repo: Repository) : ViewModel() {
         _shouldGoBack.value = true
     }
 
-    fun getStation(id: Int): LiveData<Station?> {
+    fun getStation(id: String): LiveData<Station?> {
         return repo.getStation(id).asLiveData()
     }
 }
