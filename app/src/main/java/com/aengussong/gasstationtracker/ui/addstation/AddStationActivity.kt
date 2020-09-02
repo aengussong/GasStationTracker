@@ -6,21 +6,28 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.aengussong.gasstationtracker.R
+import com.aengussong.gasstationtracker.model.Station
 import com.aengussong.gasstationtracker.ui.addstation.dialog.DetailsDialog
 import com.aengussong.gasstationtracker.utils.AddressProvider
 import com.google.android.gms.maps.GoogleMap
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val EXTRA_ID = "extra_id"
 
 class AddStationActivity : MapActivity() {
 
     companion object {
-        fun getIntent(context: Context): Intent {
-            return Intent(context, AddStationActivity::class.java)
+        fun getIntent(context: Context, stationId: Int?): Intent {
+            return Intent(context, AddStationActivity::class.java).also { intent ->
+                stationId?.let { id -> intent.putExtra(EXTRA_ID, id) }
+            }
         }
     }
 
-    private val viewModel:AddStationViewModel by viewModel()
+    private val viewModel: AddStationViewModel by viewModel()
+
+    private val stationId: Int? by lazy { intent.getIntExtraOrNull(EXTRA_ID) }
+    private var station: Station? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +35,32 @@ class AddStationActivity : MapActivity() {
         viewModel.shouldGoBack.observe(this, Observer {
             onBackPressed()
         })
+
+        stationId?.let {
+            viewModel.getStation(it).observe(this@AddStationActivity, Observer { station ->
+                this.station = station
+                DetailsDialog(station).show(supportFragmentManager, DetailsDialog::class.simpleName)
+            })
+        }
     }
 
     override fun onMapLoaded(googleMap: GoogleMap) {
-        Toast.makeText(this, R.string.add_station_explanation, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, R.string.map_explanation, Toast.LENGTH_LONG).show()
         googleMap.setOnMapLongClickListener { latLng ->
             val address = AddressProvider.fromLatLng(this@AddStationActivity, latLng)
-            DetailsDialog(address).show(supportFragmentManager, DetailsDialog::class.simpleName)
+            val dialog = station?.let { station ->
+                DetailsDialog(station.copy(address = address))
+            } ?: DetailsDialog(address)
+
+            dialog.show(supportFragmentManager, DetailsDialog::class.simpleName)
         }
     }
+}
+
+private fun Intent.getIntExtraOrNull(name: String): Int? {
+    val extra = getIntExtra(name, -1)
+    return if (extra == -1)
+        null
+    else
+        extra
 }

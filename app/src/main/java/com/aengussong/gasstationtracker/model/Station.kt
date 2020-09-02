@@ -1,6 +1,7 @@
 package com.aengussong.gasstationtracker.model
 
 data class Station(
+    val id: Int = 0,
     val address: String,
     val fuelSupplier: String,
     val type: String,

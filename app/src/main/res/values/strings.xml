@@ -4,7 +4,7 @@
     <string name="stations_list">Gas Stations</string>
     <string name="stations_stats">Stations Statistics</string>
 
-    <string name="add_station_explanation">Long tap on the map on a gas station location to add it</string>
+    <string name="map_explanation">Long tap on the map to choose address</string>
     <string name="address">Address:</string>
     <string name="fuel_supplier">Fuel\nsupplier:</string>
     <string name="type">Type:</string>

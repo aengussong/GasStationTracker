@@ -12,7 +12,18 @@ import com.aengussong.gasstationtracker.utils.getString
 import kotlinx.android.synthetic.main.dialog_add_details.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class DetailsDialog(private val address: String) : DialogFragment() {
+class DetailsDialog private constructor() : DialogFragment() {
+
+    private var station: Station? = null
+    private var address: String? = null
+
+    constructor(station: Station?) : this() {
+        this.station = station
+    }
+
+    constructor(address: String?) : this() {
+        this.address = address
+    }
 
     private val viewModel: AddStationViewModel by sharedViewModel()
 
@@ -25,18 +36,49 @@ class DetailsDialog(private val address: String) : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        et_address.setText(address)
-        btn_add.setOnClickListener {
-            val station = Station(
-                et_address.getString(),
-                et_fuel_supplier.getString(),
-                et_type.getString(),
-                et_quantity.getString().toIntOrNull() ?: 0,
-                et_cost.getString().toDoubleOrNull() ?: 0.0
+        when {
+            station != null -> editStation()
+            address != null -> addStation()
+            else -> throw IllegalArgumentException(
+                "${this::class.simpleName} can work only with provided station or address"
             )
+        }
+    }
 
-            viewModel.addStation(station)
+    private fun editStation() {
+        station?.apply {
+            et_address.setText(address)
+            et_fuel_supplier.setText(fuelSupplier)
+            et_type.setText(type)
+            et_quantity.setText(quantity.toString())
+            et_cost.setText(cost.toString())
+        }
+
+        btn_add.setOnClickListener {
+            val updatedStation = getStation().copy(
+                id = station?.id ?: 0,
+                visitedCounter = station?.visitedCounter ?: 0
+            )
+            viewModel.updateStation(updatedStation)
             dismiss()
         }
+    }
+
+    private fun addStation() {
+        et_address.setText(address)
+        btn_add.setOnClickListener {
+            viewModel.addStation(getStation())
+            dismiss()
+        }
+    }
+
+    private fun getStation(): Station {
+        return Station(
+            address = et_address.getString(),
+            fuelSupplier = et_fuel_supplier.getString(),
+            type = et_type.getString(),
+            quantity = et_quantity.getString().toIntOrNull() ?: 0,
+            cost = et_cost.getString().toDoubleOrNull() ?: 0.0
+        )
     }
 }
