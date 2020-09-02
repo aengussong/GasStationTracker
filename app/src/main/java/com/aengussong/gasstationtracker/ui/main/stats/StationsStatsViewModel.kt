@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.map
 class StationsStatsViewModel(private val repo: Repository) : ViewModel() {
 
     private val headers = DataTableHeader.Builder()
-        .item("Id", 1)
-        .item("Supplier", 5)
+        .item("Address", 5)
         .item("Cost", 2)
         .build()
 
@@ -27,8 +26,7 @@ class StationsStatsViewModel(private val repo: Repository) : ViewModel() {
         val rows = ArrayList<DataTableRow>()
         stations.forEach { station ->
             val row = DataTableRow.Builder()
-                .value(station.id)
-                .value(station.fuelSupplier)
+                .value(station.address)
                 .value(station.cost.toString())
                 .build()
             rows.add(row)
